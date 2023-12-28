@@ -281,23 +281,23 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 void doom()
 {
 
-	Point w = Point(-8, 6, -8.5);//
-	Point b = Point(-8, 0, -8.5);
-	Point d = Point(-8, 6, 8.5);
-	Point z = Point(-8, 0, 8.5);
-	Point a = Point(-4, 6, -8.5);
-	Point x = Point(-4, 0, -8.5);//
-	Point m = Point(-4, 0, 8.5);
-	Point v = Point(-4, 6, 8.5);
-	Point j = Point(12, 6, -8.5);//
-	Point i = Point(12, 0, -8.5);//
-	Point j7 = Point(16, 6, 8);
-	Point g = Point(16, 0, 8);
-	Point f = Point(16, 0, -8);
-	Point e6 = Point(16, 6, -8);
+	Point w = Point(-8, 6, 8.5);//
+	Point b = Point(-8, 0, 8.5);
+	Point d = Point(-8, 6, -8.5);
+	Point z = Point(-8, 0, -8.5);
+	Point a = Point(-4, 6, 8.5);
+	Point x = Point(-4, 0, 8.5);//
+	Point m = Point(-4, 0, -8.5);
+	Point v = Point(-4, 6, -8.5);
+	Point j = Point(12, 6, 8.5);//
+	Point i = Point(12, 0, 8.5);//
+	Point j7 = Point(16, 6, -8);
+	Point g = Point(16, 0, -8);
+	Point f = Point(16, 0, 8);
+	Point e6 = Point(16, 6, 8);
 	//j7 e6 f g 
-	Point l7 = Point(-8, 6, -8);
-	Point b1 = Point(-8, 0, -8);
+	Point l7 = Point(-8, 6, 8);
+	Point b1 = Point(-8, 0, 8);
 	//e6 f b1 l7
 	//PrimitiveDrawer r = PrimitiveDrawer();
 	//glColor3f(1, 0, 0);
@@ -326,28 +326,28 @@ void doom()
 	r.DrawQuad(l7, d, j7, e6);
 	//b1 z g f
 	r.DrawQuad(b1, z, g, f);
-	Point a2 = Point(-4, 8, -2);
+	Point a2 = Point(-4, 8, 2);
 	Point k2 = Point(-4, 9, 0);
 	Point j2 = Point(12, 9, 0);
-	Point b2 = Point(12, 8, -2);
+	Point b2 = Point(12, 8, 2);
 	glColor3f(.5, .5, .5);
 	r.DrawQuad(a2, k2, j2, b2);
 	//j2
-	Point c2 = Point(12, 8, 2);
-	Point d2 = Point(-4, 8, 2);
+	Point c2 = Point(12, 8, -2);
+	Point d2 = Point(-4, 8, -2);
 	r.DrawQuad(j2, c2, d2, k2);
 	//d2 k2 a2 
 	glColor3f(.5, .2, .9);
 	r.DrawTr(d2, k2, a2);//b2 j2 c2
 	r.DrawTr(b2, j2, c2);
-	Point s11 = Point(-7.62, 2.5, -29);
-	Point n11 = Point(-7.62, 3.73, -29);
-	Point q8 = Point(10, 3.75, -29);
-	Point p8 = Point(10, 2.5, -29);
+	Point s11 = Point(-7.62, 2.5, 29);
+	Point n11 = Point(-7.62, 3.73, 29);
+	Point q8 = Point(10, 3.75, 29);
+	Point p8 = Point(10, 2.5, 29);
 	glColor3f(0, 1, 0);
 	r.DrawQuad(s11, n11, q8, p8);
-	Point r11 = Point(-7.62, 2.5, -25);
-	Point e9 = Point(-7.62, 3.75, -25);
+	Point r11 = Point(-7.62, 2.5, 25);
+	Point e9 = Point(-7.62, 3.75, 25);
 	r.DrawQuad(s11, r11, e9, n11);
 }
 
@@ -355,28 +355,27 @@ void doom()
 void remaster()
 {
 
-	Point d7 = Point(6.5, 0, 8);
-
-	glColor3f(.1, .2, .6);
-	r.QuadWithHigh(d7, 3.5, 5, 2);
-	Point c7 = Point(6.5, 5, 8);
+	Point e7 = Point(6.5, 0, -10);
+	glColor3f(1, 1, 1);
+	r.QuadWithHigh(e7, 3.5, 5, 2);
+	Point c7 = Point(6.5, 5, -10);
 	glColor3f(.7, .5, .2);
 	r.QuadWithHigh(c7, 3.5, 1.5, 2);
-	Point w6 = Point(10, 0, 8);//4 
+	Point q7 = Point(10, 0, -11);//4 
 	glColor3f(.2, .8, .1);
-	r.QuadWithHigh(w6, 4, 3.75, 2);
-	Point q6 = Point(10, 3.75, 8);
-	r.QuadWithHigh(q6, 1, 1.25, 2);
-	Point f6 = Point(13, 3.75, 8);
+	r.QuadWithHigh(q7, 4, 3.75, 2);
+	Point d11 = Point(10, 3.75, -11);
+	r.QuadWithHigh(d11, 1, 1.25, 2);
+	Point f6 = Point(13, 3.75, -11);
 	r.QuadWithHigh(f6, 1, 1.25, 2);
-	Point v6 = Point(14, 0, 8);
+	Point v6 = Point(14, 0, -17);
 	r.QuadWithHigh(v6, 2, 3, 9);
-	Point b1 = Point(-4, 6, -4);//y=1 z=16 x=4
+	Point d1 = Point(-4, 6, -8);//y=1 z=16 x=4
 	glColor3f(.4, .2, .1);
-	r.QuadWithHigh(b1, 16, 1, 12);
-	Point g1 = Point(-4, 7, -2);//y1 z4 x
+	r.QuadWithHigh(d1, 16, 1, 12);
+	Point h1 = Point(-4, 7, -2);//y1 z4 x
 	glColor3f(.1, .5, .5);
-	r.QuadWithHigh(g1, 16, 1, 4);
+	r.QuadWithHigh(h1, 16, 1, 4);
 	Point z3 = Point(-8, 6, -2);//1 4 .3
 	glColor3f(.7, .3, .9);
 	r.QuadWithHigh(z3, .3, 1, 4);
@@ -387,32 +386,34 @@ void remaster()
 	r.QuadWithHigh(l, 4, 1.5, 12);
 	Point w4 = Point(-5.85, 6.5, 0);
 	r.drawSphere(w4, .9, 50, 50);
+	Point n3 = Point(-8, 0, -8.5);
+	r.QuadWithHigh(n3, 4, 6, .5);
 	glColor3f(0, 0, .3);
-	Point c8 = Point(10, 0, -25);
-	r.QuadWithHigh(c8, 6, 5, 16.5);
+	Point b6 = Point(10, 0, 8.5);
+	r.QuadWithHigh(b6, 6, 5, 16.5);
 	glColor3f(.4, 0, 0);
-	Point g8 = Point(10, 0, -29);
-	r.QuadWithHigh(g8, 6, 5, 4);
+	Point c8 = Point(10, 0, 25);
+	r.QuadWithHigh(c8, 6, 5, 4);
 	glColor3f(.5, 0, .7);
-	Point f9 = Point(-7.62, 0, -25);
-	r.QuadWithHigh(f9, 17.62, 3.75, 6.19);
+	Point g9 = Point(-7.62, 0, 18.81);
+	r.QuadWithHigh(g9, 17.62, 3.75, 6.19);
 	glColor3f(.5, .1, .9);
-	Point t11 = Point(-7.62, 0, -29);
-	r.QuadWithHigh(t11, 17.62, 2.5, 4);
-	Point c9 = Point(10, 5, -19.84);
-	r.QuadWithHigh(c9, 2.06, 7.18, 2.06);
+	Point u11 = Point(-7.62, 0, 25);
+	r.QuadWithHigh(u11, 17.62, 2.5, 4);
+	Point b9 = Point(10, 5, 17.78);
+	r.QuadWithHigh(b9, 2.06, 7.18, 2.06);
 
-	Point m11 = Point(1.19, 5, -21.91);
+	Point m11 = Point(1.19, 5, 21.91);
 	glColor3f(1, 0, 0);
 	r.drawSphere(m11, 2, 50, 50);
-	Point s10 = Point(1.19, 3.75, -21.91);
+	Point s10 = Point(1.19, 3.75, 21.91);
 	glColor3f(1, 1, 0);
 	r.drawCylinder(s10, 2, 1.7, 50);
 
 	glColor3f(1, 0, 0);
-	Point o10 = Point(11.03, 12.5, -18.81);
+	Point o10 = Point(11.03, 12.5, 18.81);
 	r.drawSphere(o10, .5, 50, 50);
-	Point o11 = Point(11.03, 11.5, -18.81);
+	Point o11 = Point(11.03, 11.5, 18.81);
 	glColor3f(1, 1, 1);
 	r.drawCylinder(o11, .6, .5, 50);
 
