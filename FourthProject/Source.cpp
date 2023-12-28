@@ -8,7 +8,9 @@
 #include "camera.h"
 #include "PrimitiveDrawer.h"
 #include "Point.h"
+
 #include <fstream>
+
 
 
 
@@ -118,19 +120,6 @@ void drawMyCube(float xPos, float yPos, float zPos,
 
 }
 
-
-void drawMySphere(GLUquadric *quadric, float x, float y, float z, float radius, float xRotate, float yRotate, float zRotate) {
-
-	glPushMatrix();
-
-	glTranslatef(x, y, z);
-	glRotatef(zRotate, 0, 0, 1);
-	glRotatef(yRotate, 0, 1, 0);
-	glRotatef(xRotate, 1, 0, 0);
-	gluSphere(quadric, radius, 32, 32);
-
-	glPopMatrix();
-}
 
 void drawMyCylinder(GLUquadric *quadric, float x, float y, float z, float baseRadius, float topRadius, float height, float xRotate, float yRotate, float zRotate) {
 	glPushMatrix();
@@ -286,80 +275,8 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	return TRUE;										// Initialization Went OK
 }
 
-void drawSphere(Point center, float radius, int numSlices, int numStacks) {
-	glPushMatrix();
-	glTranslatef(center.x, center.y, center.z);
 
-	//const float PI = 3.14159265358979323846;
 
-	for (int i = 0; i <= numSlices; ++i) {
-		float lat0 = PI * (-0.5 + (float)(i - 1) / numSlices);
-		float z0 = radius * sin(lat0);
-		float zr0 = radius * cos(lat0);
-
-		float lat1 = PI * (-0.5 + (float)i / numSlices);
-		float z1 = radius * sin(lat1);
-		float zr1 = radius * cos(lat1);
-
-		glBegin(GL_QUAD_STRIP);
-		for (int j = 0; j <= numStacks; ++j) {
-			float lng = 2 * PI * (float)(j - 1) / numStacks;
-			float x = cos(lng);
-			float y = sin(lng);
-
-			glNormal3f(x * zr0, y * zr0, z0);
-			glVertex3f(x * zr0, y * zr0, z0);
-
-			glNormal3f(x * zr1, y * zr1, z1);
-			glVertex3f(x * zr1, y * zr1, z1);
-		}
-		glEnd();
-	}
-
-	glPopMatrix();
-}
-void drawCylinder(Point center, float radius, float height, int numSlices) {
-	glPushMatrix();
-
-	glTranslatef(center.x, center.y + 1, center.z);
-	glRotated(90, 1, 0, 0);
-	//const float PI = 3.14159265358979323846;
-
-	glBegin(GL_QUAD_STRIP);
-	for (int i = 0; i <= numSlices; ++i) {
-		float angle = 2.0 * PI * (float)i / numSlices;
-		float x = radius * cos(angle);
-		float y = radius * sin(angle);
-
-		// Bottom point
-		glNormal3f(0.0f, 0.0f, -1.0f);
-		glVertex3f(x, y, 0.0f);
-
-		// Top point
-		glNormal3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(x, y, height);
-	}
-	glEnd();
-
-	// Draw the top and bottom circles
-	glBegin(GL_POLYGON);
-	for (int i = 0; i <= numSlices; ++i) {
-		float angle = 2.0 * PI * (float)i / numSlices;
-		float x = radius * cos(angle);
-		float y = radius * sin(angle);
-
-		// Bottom circle
-		glNormal3f(0.0f, 0.0f, -1.0f);
-		glVertex3f(x, y, 0.0f);
-
-		// Top circle
-		glNormal3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(x, y, height);
-	}
-	glEnd();
-
-	glPopMatrix();
-}
 
 void doom()
 {
@@ -469,7 +386,7 @@ void remaster()
 	Point l = Point(12, 6, -4);
 	r.QuadWithHigh(l, 4, 1.5, 12);
 	Point w4 = Point(-5.85, 6.5, 0);
-	drawSphere(w4, .9, 50, 50);
+	r.drawSphere(w4, .9, 50, 50);
 	glColor3f(0, 0, .3);
 	Point c8 = Point(10, 0, -25);
 	r.QuadWithHigh(c8, 6, 5, 16.5);
@@ -487,24 +404,24 @@ void remaster()
 
 	Point m11 = Point(1.19, 5, -21.91);
 	glColor3f(1, 0, 0);
-	drawSphere(m11, 2, 50, 50);
+	r.drawSphere(m11, 2, 50, 50);
 	Point s10 = Point(1.19, 3.75, -21.91);
 	glColor3f(1, 1, 0);
-	drawCylinder(s10, 2, 1.7, 50);
+	r.drawCylinder(s10, 2, 1.7, 50);
 
 	glColor3f(1, 0, 0);
 	Point o10 = Point(11.03, 12.5, -18.81);
-	drawSphere(o10, .5, 50, 50);
+	r.drawSphere(o10, .5, 50, 50);
 	Point o11 = Point(11.03, 11.5, -18.81);
 	glColor3f(1, 1, 1);
-	drawCylinder(o11, .6, .5, 50);
+	r.drawCylinder(o11, .6, .5, 50);
 
 	Point f2 = Point(14, 8, 0);
 	glColor3f(1, 0, 0);
-	drawSphere(f2, 1.2, 50, 50);
+	r.drawSphere(f2, 1.2, 50, 50);
 	Point j1 = Point(14, 7, 0);
 	glColor3f(1, 1, 0);
-	drawCylinder(j1, 1.2, 1.0, 50);
+	r.drawCylinder(j1, 1.2, 1.0, 50);
 
 }
 
@@ -528,11 +445,11 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 
 	glPopMatrix();
     
-	/*glEnable(GL_TEXTURE_2D);
-     	glBindTexture(GL_TEXTURE_2D, image);
+/*	glEnable(GL_TEXTURE_2D);
+     	glBindTexture(GL_TEXTURE_2D, image2);
            drawMyCylinder(quadric, 0.0f, 0.0f, 0.0f, 1, 1, 5, 90.0f, 0.0f, 0.0f);
-	glDisable(GL_TEXTURE_2D);
-*/
+	glDisable(GL_TEXTURE_2D);*/
+
 	
 	//
 	

@@ -24,10 +24,10 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Majd Al-Maleh\Desktop\Mosque2\SecondProject\Project1\PrimitiveDrawer.cpp">
+    <ClCompile Include="PrimitiveDrawer.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Majd Al-Maleh\Desktop\Mosque2\SecondProject\Project1\Point.cpp">
+    <ClCompile Include="Point.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
