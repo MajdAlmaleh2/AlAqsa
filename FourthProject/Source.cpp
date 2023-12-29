@@ -121,16 +121,6 @@ void drawMyCube(float xPos, float yPos, float zPos,
 }
 
 
-void drawMyCylinder(GLUquadric *quadric, float x, float y, float z, float baseRadius, float topRadius, float height, float xRotate, float yRotate, float zRotate) {
-	glPushMatrix();
-	glTranslatef(x, y, z);
-	glRotatef(zRotate, 0, 0, 1);
-	glRotatef(yRotate, 0, 1, 0);
-	glRotatef(xRotate, 1, 0, 0);
-	gluCylinder(quadric, baseRadius, topRadius, height, 32, height * 5);
-	glPopMatrix();
-}
-
 
 void Draw_Skybox(float x, float y, float z, float width, float height, float length)
 {
@@ -240,7 +230,9 @@ void Key(bool* keys, float speed)
 		MyCamera.MoveUpward(-1 * speed);
 	
 }
-int image3;
+int image3, leftSideMosque1, leftSideMosque, topMosque,bottomMosque, rightSideMosque, frontSideMosque, ramp, rightSideMosqueFront1Front, rightSideMosqueFront1right, rightSideMosqueFront2front,
+rightSideMosqueFront3front, roofTop, roofSide, roofSideRotated, frontFront, doomSphere, sidePrayer, sideMusiam
+, frontMusiam, frontMusiam2,azan, azanRotated,darkWall;
 int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 {
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
@@ -253,7 +245,43 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 
 
 	glEnable(GL_TEXTURE_2D);
+
 	image = LoadTexture("back.bmp", 255);
+	leftSideMosque1 = LoadTexture("leftSideMosque1.bmp", 255);
+	leftSideMosque = LoadTexture("leftSideMosque.bmp", 255);
+	topMosque = LoadTexture("topMosque.bmp", 255);
+	bottomMosque = LoadTexture("carpet.bmp", 255);
+	rightSideMosque = LoadTexture("rightSideMosque.bmp", 255);
+	frontSideMosque = LoadTexture("frontSideMosque.bmp", 255);
+	rightSideMosqueFront1Front = LoadTexture("rightSideMosqueFront1Front.bmp", 255);
+	rightSideMosqueFront1right = LoadTexture("rightSideMosqueFront1right.bmp", 255);
+	rightSideMosqueFront2front = LoadTexture("wall2.bmp", 255);
+	darkWall = LoadTexture("wall.bmp", 255);
+
+	rightSideMosqueFront3front = LoadTexture("rightSideMosqueFront3front.bmp", 255);
+	sideMusiam = LoadTexture("sideMusiam.bmp", 255);
+	frontMusiam = LoadTexture("frontMusiam.bmp", 255);
+	frontMusiam2 = LoadTexture("frontMusiam2.bmp", 255);
+	azan = LoadTexture("azan.bmp", 255);
+	azanRotated = LoadTexture("azanRotated.bmp", 255);
+
+
+
+
+
+
+
+
+	sidePrayer = LoadTexture("sidePrayer.bmp", 255);
+	doomSphere = LoadTexture("doomSphere.bmp", 255);
+	frontFront = LoadTexture("frontFront.bmp", 255);
+	roofSideRotated = LoadTexture("roofSideRotated.bmp", 255);
+	roofTop = LoadTexture("roofTop.bmp", 255);
+	roofSide = LoadTexture("roofSide.bmp", 255);
+
+
+
+	ramp = LoadTexture("ramp.bmp", 255);
 	image2 = LoadTexture("DU icon.bmp");
 	image3 = LoadTexture("building.bmp", 255);
 
@@ -268,10 +296,10 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glDisable(GL_TEXTURE_2D);
 	
 	MyCamera = Camera();
-	MyCamera.Position.x = 0;
-	MyCamera.Position.y = 0;
-	MyCamera.Position.z = +15;
-	
+	MyCamera.RotateY(-90);
+	MyCamera.Position.x = -40;
+	MyCamera.Position.y = 10;
+	MyCamera.Position.z = 20;
 	return TRUE;										// Initialization Went OK
 }
 
@@ -285,14 +313,16 @@ void doom()
 	Point b = Point(-8, 0, 8.5);
 	Point d = Point(-8, 6, -8.5);
 	Point z = Point(-8, 0, -8.5);
-	Point a = Point(-4, 6, 8.5);
-	Point x = Point(-4, 0, 8.5);//
-	Point m = Point(-4, 0, -8.5);
-	Point v = Point(-4, 6, -8.5);
+
+	Point a = Point(-8, 6, 8);
+	Point x = Point(-8, 0, 8);//
+	Point m = Point(-8, 0, -8.5);
+	Point v = Point(-8, 6, -8.5);
+	//r.DrawQuad(d, j7, g, z);r.DrawQuad(e6, f, b1, l7);
 	Point j = Point(12, 6, 8.5);//
 	Point i = Point(12, 0, 8.5);//
-	Point j7 = Point(16, 6, -8);
-	Point g = Point(16, 0, -8);
+	Point j7 = Point(16, 6, -8.5);
+	Point g = Point(16, 0, -8.5);
 	Point f = Point(16, 0, 8);
 	Point e6 = Point(16, 6, 8);
 	//j7 e6 f g 
@@ -303,52 +333,62 @@ void doom()
 	//glColor3f(1, 0, 0);
 	////a x m v
 	//r.DrawQuad(d, w, b, z);
-	glColor3f(1, 0, 1);
-	r.DrawQuad(w, a, x, b);
-	glColor3f(1, 1, 0);
-	r.DrawQuad(v, d, z, m);
+	//glColor3f(1, 0, 0);
+	//r.DrawQuadWithTexture(w, a, x, b, image);
+	//glColor3f(1, 1, 0);
+	//r.DrawQuad(v, d, z, m);
 	//a w m v
-	glColor3f(0, 1, 0);
-	r.DrawQuad(v, a, w, d);
-	glColor3f(0, 0, 1);
+	//glColor3f(0, 1, 0);
+	//r.DrawQuad(v, a, w, d);
+	//glColor3f(0, 0, 1);
 	//z m x b 
-	r.DrawQuad(z, m, x, b);
-	glColor3f(1, 1, 1);
-	r.DrawQuad(a, x, m, v);
-	glColor3f(1, 0, 1);
-	r.DrawQuad(w, j, i, x);
-	r.DrawQuad(j7, e6, f, g);
-	r.DrawQuad(e6, f, b1, l7);
+//	r.DrawQuad(z, m, x, b);
+	//glColor3f(1, 0, 0);
+	//front
+	r.DrawQuadWithTexture(a, x, m, v, frontSideMosque);
+	//glColor3f(1, 0, 1);
+	//r.DrawQuad(w, j, i, x);
+	//glColor3f(1, 1, 0);
+	//back
+	r.DrawQuadWithTexture( e6,f, g, j7   , leftSideMosque);
+	//left
+	r.DrawQuadWithTexture(e6, f, b1, l7, leftSideMosque);
 	//w b j7 g
-	r.DrawQuad(d, j7, g, z);
-	glColor3f(1, 1, 1);
+	//right
+	r.DrawQuadWithTexture( d,z , g, j7, rightSideMosque);
+	//rooooooooooooooooooooooooooof
+//	glColor3f(0, 1, 0);
 	// e6 l7 w7 j7
-	r.DrawQuad(l7, d, j7, e6);
+	//roof
+	r.DrawQuadWithTexture( d,l7,  e6, j7 , ramp);
 	//b1 z g f
-	r.DrawQuad(b1, z, g, f);
+	//groundddddddddddddddd
+	r.DrawQuadWithTexture(b1, z, g, f, bottomMosque);
 	Point a2 = Point(-4, 8, 2);
 	Point k2 = Point(-4, 9, 0);
 	Point j2 = Point(12, 9, 0);
 	Point b2 = Point(12, 8, 2);
-	glColor3f(.5, .5, .5);
-	r.DrawQuad(a2, k2, j2, b2);
+	//rampppppp
+	//glColor3f(.5, .5, .5);
+	r.DrawQuadWithTexture(a2, k2, j2, b2, ramp);
 	//j2
 	Point c2 = Point(12, 8, -2);
 	Point d2 = Point(-4, 8, -2);
-	r.DrawQuad(j2, c2, d2, k2);
+	r.DrawQuadWithTexture(j2, c2, d2, k2, ramp);
 	//d2 k2 a2 
-	glColor3f(.5, .2, .9);
-	r.DrawTr(d2, k2, a2);//b2 j2 c2
-	r.DrawTr(b2, j2, c2);
-	Point s11 = Point(-7.62, 2.5, 29);
-	Point n11 = Point(-7.62, 3.73, 29);
-	Point q8 = Point(10, 3.75, 29);
-	Point p8 = Point(10, 2.5, 29);
-	glColor3f(0, 1, 0);
-	r.DrawQuad(s11, n11, q8, p8);
-	Point r11 = Point(-7.62, 2.5, 25);
-	Point e9 = Point(-7.62, 3.75, 25);
-	r.DrawQuad(s11, r11, e9, n11);
+	//glColor3f(.5, .2, .9);
+	r.DrawTrWithTexture(d2, k2, a2, ramp);//b2 j2 c2
+	r.DrawTrWithTexture(b2, j2, c2, ramp);
+	Point s11 = Point(-7.62, 2.5, 28.5);
+	Point n11 = Point(-7.62, 3.73, 28.5);
+	Point q8 = Point(10, 3.75, 28.5);
+	Point p8 = Point(10, 2.5, 28.5);
+	//glColor3f(0, 1, 0);
+	//musiuam roof quads
+	r.DrawQuadWithTexture(s11, n11, q8, p8, rightSideMosqueFront2front);
+	Point r11 = Point(-7.62, 2.5, 24.5);
+	Point e9 = Point(-7.62, 3.75, 24.5);
+	r.DrawQuadWithTexture(s11, r11, e9, n11, rightSideMosqueFront2front);
 }
 
 
@@ -356,73 +396,94 @@ void remaster()
 {
 
 	Point e7 = Point(6.5, 0, -10);
-	glColor3f(1, 1, 1);
-	r.QuadWithHigh(e7, 3.5, 5, 2);
+	//glColor3f(1, 0, 0);
+
 	Point c7 = Point(6.5, 5, -10);
-	glColor3f(.7, .5, .2);
-	r.QuadWithHigh(c7, 3.5, 1.5, 2);
+	//glColor3f(1, 1, 0);
+	//r.QuadWithHigh(c7, 3.5, 1.5, 2);
+	r.QuadWithHighAndTexture(e7, 3.5, 6, 4, rightSideMosqueFront1Front, rightSideMosqueFront1Front, rightSideMosqueFront1right, rightSideMosqueFront1right, rightSideMosqueFront2front, rightSideMosqueFront2front);
 	Point q7 = Point(10, 0, -11);//4 
-	glColor3f(.2, .8, .1);
-	r.QuadWithHigh(q7, 4, 3.75, 2);
+	
+	r.QuadWithHighAndTexture(q7, 4, 3.75, 3, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front);
+	
 	Point d11 = Point(10, 3.75, -11);
-	r.QuadWithHigh(d11, 1, 1.25, 2);
+	//r.QuadWithHigh(d11, 1, 1.25, 2);
+	r.QuadWithHighAndTexture(d11, 1, 1.25, 2, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front);
+
 	Point f6 = Point(13, 3.75, -11);
-	r.QuadWithHigh(f6, 1, 1.25, 2);
-	Point v6 = Point(14, 0, -17);
-	r.QuadWithHigh(v6, 2, 3, 9);
+	//r.QuadWithHigh(f6, 1, 1.25, 2);
+	r.QuadWithHighAndTexture(f6, 1, 1.25, 2, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front);
+
+
+	Point v6 = Point(14, 0, -17.5);
+	r.QuadWithHighAndTexture(v6, 2, 3, 9, rightSideMosqueFront2front, rightSideMosqueFront3front, rightSideMosqueFront3front, rightSideMosqueFront3front, rightSideMosqueFront2front, rightSideMosqueFront2front);
+
 	Point d1 = Point(-4, 6, -8);//y=1 z=16 x=4
-	glColor3f(.4, .2, .1);
-	r.QuadWithHigh(d1, 16, 1, 12);
+	
+	r.QuadWithHighAndTexture(d1, 16, 1, 12, roofSide, roofTop, roofSideRotated, roofSideRotated, roofTop, roofSide);
 	Point h1 = Point(-4, 7, -2);//y1 z4 x
-	glColor3f(.1, .5, .5);
-	r.QuadWithHigh(h1, 16, 1, 4);
-	Point z3 = Point(-8, 6, -2);//1 4 .3
-	glColor3f(.7, .3, .9);
-	r.QuadWithHigh(z3, .3, 1, 4);
-	Point u3 = Point(-8, 6, -1);//.5 2 4 
-	r.QuadWithHigh(u3, 4, .5, 2);
-	glColor3f(.4, .7, .1);
+
+	//glColor3f(1, 0, 0);
+	r.QuadWithHighAndTexture(h1, 16, 1, 4, roofSide, roofTop, roofSideRotated, roofSideRotated, roofTop, roofSide);
+	Point z3 = Point(-8, 6, -2.2);//1 4 .3
+	//glColor3f(1, 0, 0);
+	r.QuadWithHighAndTexture(z3, .3, 1, 3.89,frontFront, frontFront, frontFront, frontFront, frontFront, frontFront);
+	
+	Point u3 = Point(-7.5, 6, -1);//.5 2 4 
+	r.QuadWithHighAndTexture(u3, 3.5, .5, 2, roofSide, roofTop, roofSideRotated, roofSideRotated, roofTop, roofSide);
 	Point l = Point(12, 6, -4);
-	r.QuadWithHigh(l, 4, 1.5, 12);
+	r.QuadWithHighAndTexture(l, 4, 1.5, 12, roofSide, roofTop, roofSideRotated, roofSideRotated, roofTop, roofSide);
 	Point w4 = Point(-5.85, 6.5, 0);
-	r.drawSphere(w4, .9, 50, 50);
-	Point n3 = Point(-8, 0, -8.5);
-	r.QuadWithHigh(n3, 4, 6, .5);
-	glColor3f(0, 0, .3);
-	Point b6 = Point(10, 0, 8.5);
-	r.QuadWithHigh(b6, 6, 5, 16.5);
-	glColor3f(.4, 0, 0);
-	Point c8 = Point(10, 0, 25);
-	r.QuadWithHigh(c8, 6, 5, 4);
-	glColor3f(.5, 0, .7);
-	Point g9 = Point(-7.62, 0, 18.81);
-	r.QuadWithHigh(g9, 17.62, 3.75, 6.19);
-	glColor3f(.5, .1, .9);
-	Point u11 = Point(-7.62, 0, 25);
-	r.QuadWithHigh(u11, 17.62, 2.5, 4);
-	Point b9 = Point(10, 5, 17.78);
-	r.QuadWithHigh(b9, 2.06, 7.18, 2.06);
-
-	Point m11 = Point(1.19, 5, 21.91);
-	glColor3f(1, 0, 0);
-	r.drawSphere(m11, 2, 50, 50);
-	Point s10 = Point(1.19, 3.75, 21.91);
-	glColor3f(1, 1, 0);
-	r.drawCylinder(s10, 2, 1.7, 50);
-
-	glColor3f(1, 0, 0);
-	Point o10 = Point(11.03, 12.5, 18.81);
-	r.drawSphere(o10, .5, 50, 50);
-	Point o11 = Point(11.03, 11.5, 18.81);
-	glColor3f(1, 1, 1);
-	r.drawCylinder(o11, .6, .5, 50);
+	r.drawSphereWithTexture(w4, .9, 50, 50, rightSideMosqueFront2front);
 
 	Point f2 = Point(14, 8, 0);
-	glColor3f(1, 0, 0);
-	r.drawSphere(f2, 1.2, 50, 50);
+	//glColor3f(1, 0, 0);
+	r.drawSphereWithTexture(f2, 1.9, 50, 50, ramp);
 	Point j1 = Point(14, 7, 0);
-	glColor3f(1, 1, 0);
-	r.drawCylinder(j1, 1.2, 1.0, 50);
+	//glColor3f(1, 1, 1);
+	r.drawCylinderWithTexture(j1, 1.9, 1.0, 50, roofSide);
+
+//	glColor3f(1, 0, 0);
+	//Point n3 = Point(-8, 0, -8.5);
+	//r.QuadWithHigh(n3, 4, 6, .5);
+	glPushMatrix();
+	glTranslated(0, 0, -0.5);
+	//
+	Point b6 = Point(10, 0, 8.5);
+	r.QuadWithHighAndTexture(b6, 6, 5, 16.5, rightSideMosqueFront2front, rightSideMosqueFront2front , rightSideMosqueFront2front , sidePrayer, rightSideMosqueFront2front, rightSideMosqueFront2front);
+	//glColor3f(.4, 0, 0);
+	//
+	Point c8 = Point(10, 0, 25);
+	r.QuadWithHighAndTexture(c8, 6, 5, 4, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front);
+	//glColor3f(.5, 0, .7);
+	//glColor3f(1, 0, 0);
+	Point g9 = Point(-7.62, 0, 18.81);
+	r.QuadWithHighAndTexture(g9, 17.62, 3.75, 6.19, sideMusiam, rightSideMosqueFront2front, sideMusiam, frontMusiam, rightSideMosqueFront2front, rightSideMosqueFront2front);
+	//glColor3f(.5, .1, .9);
+//	glColor3f(1, 0, 0);
+	Point u11 = Point(-7.62, 0, 25);
+	r.QuadWithHighAndTexture(u11, 17.62, 2.5, 4, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, frontMusiam2 , rightSideMosqueFront2front, rightSideMosqueFront2front);
+	//glColor3f(.5, .1, .9);
+	//glColor3f(1, 0, 0);
+	Point b9 = Point(10, 5, 17.78);
+	r.QuadWithHighAndTexture(b9, 2.06, 7.18, 2.06, azan, azanRotated, azanRotated, azanRotated, azan, azan);
+
+	Point m11 = Point(1.19, 3, 21.91);
+	//glColor3f(1, 0, 0);
+	r.drawSphereWithTexture(m11, 2, 50, 50, darkWall);
+	Point s10 = Point(1.19, 3.75, 21.91);
+//	glColor3f(1, 0, 0);
+//	r.drawCylinder(s10, 2, 1.7, 50);
+
+	//glColor3f(1, 0, 1);
+	Point o10 = Point(11.03, 12.8, 18.81);
+	r.drawSphereWithTexture(o10, .6, 50, 50,ramp);
+	Point o11 = Point(11.03, 11.5, 18.81);
+	//glColor3f(1, 1, 1);
+	r.QuadWithHighAndTexture(u11, 17.62, 2.5, 4, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, frontMusiam2 , rightSideMosqueFront2front, rightSideMosqueFront2front);
+	r.drawCylinderWithTexture(o11, .6, .4, 50, rightSideMosqueFront2front);
+
+	glPopMatrix();
 
 }
 
