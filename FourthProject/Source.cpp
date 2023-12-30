@@ -401,10 +401,10 @@ void remaster()
 	Point c7 = Point(6.5, 5, -10);
 	//glColor3f(1, 1, 0);
 	//r.QuadWithHigh(c7, 3.5, 1.5, 2);
-	r.QuadWithHighAndTexture(e7, 3.5, 6, 4, rightSideMosqueFront1Front, rightSideMosqueFront1Front, rightSideMosqueFront1right, rightSideMosqueFront1right, rightSideMosqueFront2front, rightSideMosqueFront2front);
+	r.QuadWithHighAndTexture(e7, 3.5, 6, 1.5, rightSideMosqueFront1Front, rightSideMosqueFront1Front, rightSideMosqueFront1right, rightSideMosqueFront1right, rightSideMosqueFront2front, rightSideMosqueFront2front);
 	Point q7 = Point(10, 0, -11);//4 
 	
-	r.QuadWithHighAndTexture(q7, 4, 3.75, 3, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front);
+	r.QuadWithHighAndTexture(q7, 4, 3.75, 2.5, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front, rightSideMosqueFront2front);
 	
 	Point d11 = Point(10, 3.75, -11);
 	//r.QuadWithHigh(d11, 1, 1.25, 2);
